@@ -4,12 +4,16 @@ import discoverylab.telebot.master.configuration.Config;
 import jssc.SerialPort;
 import jssc.SerialPortException;
 
+import static discoverylab.util.LogUtils.*;
+
 /**
- * Handles Serial connections and 
+ * Handles Serial connection manager
  * @author Irvin Steve Cardenas
  *
  */
 public class CoreSerialManager {
+	public static String TAG = makeLogTag("CoreSerialManager");
+	
 	private SerialPort	serialPort;
 	
 	protected Boolean serialConnected		= false;
@@ -28,6 +32,7 @@ public class CoreSerialManager {
 	 * @param serialPortName
 	 */
 	public CoreSerialManager(String serialPortName) {
+		LOGW(TAG, "Using default serial parameters with serial port name: " + serialPortName);
 		this.serialPortName = serialPortName;
 		this.baudRate		= Config.SERIAL_BAUD_RATE;
 		this.dataBits 		= Config.SERIAL_DATA_BITS;
@@ -44,6 +49,7 @@ public class CoreSerialManager {
 	 * @param baudRate
 	 */
 	public CoreSerialManager(String serialPortName, String baudRate) {
+		LOGW(TAG, "Using default serial parameters with serial port name: " + serialPortName + " , baud rate: " + baudRate);
 		this.serialPortName = serialPortName;
 		this.baudRate		= Integer.parseInt(baudRate);
 		this.dataBits 		= Config.SERIAL_DATA_BITS;
@@ -108,6 +114,30 @@ public class CoreSerialManager {
 	}
 	
 	/**
+	 * Sets serial parameters and event mask
+	 * @return true if both the parameters and the mask is set, else false
+	 */
+	public boolean initialize(){
+		boolean setParams = false, setEventMask = false;
+		try {
+			serialPort.setParams(baudRate, dataBits, stopBits, parityType);
+			setParams = true;
+		} catch (SerialPortException e) {
+			LOGE(TAG, "Error setting serial parameters");
+			e.printStackTrace();
+		}
+		
+		try {
+			serialPort.setEventsMask(eventMask);
+			setEventMask = true;
+		} catch (SerialPortException e) {
+			LOGE(TAG, "Error setting serial serial event mask");
+			e.printStackTrace();
+		}
+		return setParams && setEventMask;
+	}
+	
+	/**
 	 * 
 	 * @return
 	 */
@@ -115,13 +145,13 @@ public class CoreSerialManager {
 		try {
 			serialPort.removeEventListener();
 		} catch (SerialPortException e) {
-			// TODO Auto-generated catch block
+			LOGE(TAG, "Error remove serial event listener");
 			e.printStackTrace();
 		}
 		try {
 			serialPort.closePort();
 		} catch (SerialPortException e) {
-			// TODO Auto-generated catch block
+			LOGE(TAG, "Error closing serial port");
 			e.printStackTrace();
 		}
 		// We negate because is it's open, that means that it is serialPortClose failed
@@ -138,7 +168,7 @@ public class CoreSerialManager {
 			serialPort.addEventListener(listener);
 			return true;
 		} catch (SerialPortException e) {
-			// TODO Auto-generated catch block
+			LOGE(TAG, "Error adding serial event listener");
 			e.printStackTrace();
 			return false;
 		}
