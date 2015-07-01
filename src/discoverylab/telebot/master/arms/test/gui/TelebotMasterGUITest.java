@@ -20,16 +20,14 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
-import jssc.SerialPort;
-import jssc.SerialPortException;
 import jssc.SerialPortList;
-import discoverylab.telebot.master.arms.ArmsSerialReader;
 import discoverylab.telebot.master.core.CoreSerialManager;
 import discoverylab.telebot.master.core.CoreSerialReader;
 import discoverylab.telebot.master.core.CoreSerialReader.CallbackInterface;
+import discoverylab.telebot.master.core.SerialReaderImpl;
 import static discoverylab.util.LogUtils.*;
 
-public class TelebotMasterArmsGUITest implements CoreSerialReader.CallbackInterface  {
+public class TelebotMasterGUITest implements CoreSerialReader.CallbackInterface  {
 	
 	public static String TAG = makeLogTag("TelebotMasterArmsGUITest");
 	
@@ -63,7 +61,7 @@ public class TelebotMasterArmsGUITest implements CoreSerialReader.CallbackInterf
 	/**
 	 * Create the application
 	 */
-	public TelebotMasterArmsGUITest(){
+	public TelebotMasterGUITest(){
 		initialize();
 	}
 	
@@ -79,7 +77,7 @@ public class TelebotMasterArmsGUITest implements CoreSerialReader.CallbackInterf
 			{
 				try
 				{
-					TelebotMasterArmsGUITest window = new TelebotMasterArmsGUITest();
+					TelebotMasterGUITest window = new TelebotMasterGUITest();
 					window.frmAnpp.setVisible(true);
 				}
 				catch (Exception e)
@@ -167,10 +165,12 @@ public class TelebotMasterArmsGUITest implements CoreSerialReader.CallbackInterf
 				{
 					try
 					{
+						// STEP 1: Create Serial Manager
 						serialManager = new CoreSerialManager(
 									(String) comboBoxPort.getSelectedItem()
 								, 	(String) comboBoxBaud.getSelectedItem());
 						
+						// STEP 2: Open Serial Port
 						if(serialManager.openPort()){
 							LOGI(TAG, "Serial Manager opened serial port");
 						}
@@ -178,6 +178,7 @@ public class TelebotMasterArmsGUITest implements CoreSerialReader.CallbackInterf
 							LOGI(TAG, "Serial Manager failed to open serial port");
 						}
 						
+						// STEP 3: Initialize Serial Paramaters
 						if(serialManager.initialize()) {
 							LOGI(TAG, "Serial Manager initialized ports");
 						}
@@ -185,9 +186,9 @@ public class TelebotMasterArmsGUITest implements CoreSerialReader.CallbackInterf
 //						serialPort.setParams(Integer.parseInt((String) comboBoxBaud.getSelectedItem()), SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
 //						serialPort.setEventsMask(SerialPort.MASK_RXCHAR);
 
-						// add an event listener, which is the subclass at the
-						// bottom of this file
-						serialManager.addEventListener(new ArmsSerialReader(serialManager.getSerialPort(), callbackInterface));
+						// STEP 4: Add Serial Event Listener
+						serialManager.addEventListener(
+								new SerialReaderImpl(serialManager.getSerialPort(), callbackInterface));
 
 						// change the button to be disconnect once we are
 						// connected

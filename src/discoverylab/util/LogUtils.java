@@ -2,6 +2,12 @@ package discoverylab.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+/**
+ * LogUtils
+ * @author Irvin Steve Cardenas
+ *
+ */
 public class LogUtils {
 	
 //	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME); Java Utils Logger = No Bueno

@@ -9,6 +9,11 @@ import com.rti.dds.topic.Topic;
 
 import jssc.SerialPort;
 
+/**
+ * CoreMasterDeviceComponent
+ * @author Irvin Steve Cardenas
+ *
+ */
 public abstract class CoreMasterDeviceComponent {
 	
 	public static String TAG = makeLogTag("CoreMasterDeviceComponent");

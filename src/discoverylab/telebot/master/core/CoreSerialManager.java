@@ -7,9 +7,10 @@ import jssc.SerialPortException;
 import static discoverylab.util.LogUtils.*;
 
 /**
- * Handles Serial connection manager
+ * CoreSerialManager
  * @author Irvin Steve Cardenas
  *
+ * Handles Serial connection manager
  */
 public class CoreSerialManager {
 	public static String TAG = makeLogTag("CoreSerialManager");
@@ -56,7 +57,15 @@ public class CoreSerialManager {
 		this.stopBits 		= Config.SERIAL_STOP_BITS;
 		this.parityType 	= Config.SERIAL_PARITY_TYPE;
 		this.eventMask		= Config.SERIAL_EVENT_MASK;
-		serialPort 			= new SerialPort(serialPortName);
+		this.serialPort 	= new SerialPort(serialPortName);
+		
+/*		try {
+			this.serialPort.openPort();
+			System.out.println("GOOD!!!!");
+		} catch (SerialPortException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 	}
 	
 	/**
@@ -104,10 +113,10 @@ public class CoreSerialManager {
 	 * @return
 	 */
 	public boolean openPort(){
-		try {
+		try {			
 			serialPort.openPort();
 		} catch (SerialPortException e) {
-			// TODO Auto-generated catch block
+			LOGE(TAG, "Could not open serial port");
 			e.printStackTrace();
 		}
 		return serialPort.isOpened();
@@ -186,5 +195,13 @@ public class CoreSerialManager {
 				stopBits != null && 
 				parityType != null && 
 				eventMask != null);
+	}
+	
+	/**
+	 * Return the serial port
+	 * @return
+	 */
+	public SerialPort getSerialPort(){
+		return serialPort;
 	}
 }

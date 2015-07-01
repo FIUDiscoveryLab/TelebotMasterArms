@@ -3,9 +3,11 @@ package discoverylab.telebot.master.arms.configurations;
 import jssc.SerialPort;
 
 /**
+ * SlaveArmsConfig
+ * @author Irvin Steve Cardenas
+ *
  * Device Specific Configuration
  * This contains the specific serial parameters for a device used to control the arms on the Master side
- * @author Irvin Steve Cardenas
  *
  */
 public class SlaveArmsConfig {
