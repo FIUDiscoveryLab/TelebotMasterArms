@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
+import discoverylab.telebot.master.core.serial.CoreSerialReader;
 import jssc.SerialPort;
 import jssc.SerialPortEvent;
 import jssc.SerialPortException;
-import discoverylab.telebot.master.core.CoreSerialReader;
 
 /**
  * ArmSerialReader

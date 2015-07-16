@@ -2,5 +2,18 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="ThirdParty/freetts/cmu_time_awb.jar"/>
+	<classpathentry kind="lib" path="ThirdParty/freetts/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="ThirdParty/freetts/cmudict04.jar"/>
+	<classpathentry kind="lib" path="ThirdParty/freetts/cmulex.jar"/>
+	<classpathentry kind="lib" path="ThirdParty/freetts/cmutimelex.jar"/>
+	<classpathentry kind="lib" path="ThirdParty/freetts/en_us.jar"/>
+	<classpathentry kind="lib" path="ThirdParty/freetts/freetts-jsapi10.jar"/>
+	<classpathentry kind="lib" path="ThirdParty/freetts/freetts.jar"/>
+	<classpathentry kind="lib" path="ThirdParty/freetts/mbrola.jar"/>
+	<classpathentry kind="lib" path="ThirdParty/JSSC/jssc.jar"/>
+	<classpathentry kind="lib" path="ThirdParty/ndds.5.1.0/class/nddsjava.jar"/>
+	<classpathentry kind="lib" path="ThirdParty/SFL4J/slf4j-api-1.7.12.jar"/>
+	<classpathentry kind="lib" path="ThirdParty/SFL4J/slf4j-simple-1.7.12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

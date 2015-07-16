@@ -24,9 +24,9 @@ import jssc.SerialPort;
 import jssc.SerialPortException;
 import jssc.SerialPortList;
 import discoverylab.telebot.master.arms.ArmsSerialReader;
-import discoverylab.telebot.master.core.CoreSerialManager;
-import discoverylab.telebot.master.core.CoreSerialReader;
-import discoverylab.telebot.master.core.CoreSerialReader.CallbackInterface;
+import discoverylab.telebot.master.core.serial.CoreSerialManager;
+import discoverylab.telebot.master.core.serial.CoreSerialReader;
+import discoverylab.telebot.master.core.serial.CoreSerialReader.CallbackInterface;
 import static discoverylab.util.LogUtils.*;
 
 public class TelebotMasterArmsGUITest implements CoreSerialReader.CallbackInterface  {

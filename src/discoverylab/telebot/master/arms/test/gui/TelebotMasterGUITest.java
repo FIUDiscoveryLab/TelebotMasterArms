@@ -20,11 +20,11 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import discoverylab.telebot.master.core.serial.CoreSerialManager;
+import discoverylab.telebot.master.core.serial.CoreSerialReader;
+import discoverylab.telebot.master.core.serial.CoreSerialReader.CallbackInterface;
+import discoverylab.telebot.master.core.serial.SerialReaderImpl;
 import jssc.SerialPortList;
-import discoverylab.telebot.master.core.CoreSerialManager;
-import discoverylab.telebot.master.core.CoreSerialReader;
-import discoverylab.telebot.master.core.CoreSerialReader.CallbackInterface;
-import discoverylab.telebot.master.core.SerialReaderImpl;
 import static discoverylab.util.LogUtils.*;
 
 public class TelebotMasterGUITest implements CoreSerialReader.CallbackInterface  {
